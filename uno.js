@@ -54,7 +54,7 @@ function mostrar()
 		
 			default:
 				if (temperaturaCorporal >= 38){
-					alert("Permiso no otorgado")
+					alert("Permiso no otorgado");
 				}
 				break;
 		}
