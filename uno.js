@@ -30,6 +30,8 @@ function mostrar()
 	let nombreApellido;
 	let temperaturaCorporal;
 	let sintomas;
+	let permisoOtorgado;
+	let permisoNoOtorgado;
 	
 	nombreApellido = document.getElementById("nombreyapellido").value;
 	temperaturaCorporal = parseFloat(document.getElementById("temperatura").value);
@@ -37,26 +39,39 @@ function mostrar()
 
 	if (temperaturaCorporal >= 35 && temperaturaCorporal <= 40) {
 		switch (sintomas) {
-			case "Tos":
-				if(temperaturaCorporal <= 37){
-					alert("Permiso otorgado. Por favor no se olvide de toser sobre su codo.");
+			case "Ninguno":
+				if (temperaturaCorporal >= 38){
+					permisoNoOtorgado;
+				}
+				else{
+					permisoOtorgado;
 				}
 				break;
-			case "PerdidaOlfato":				
-			case "PerdidaGusto":
-				if(temperaturaCorporal < 38){
-					alert("Permiso otorgado.");
+			case "Tos":
+				if(temperaturaCorporal <= 37){
+					alert("Permiso otorgado. Por favor no se olvide de toser sobre su codo." + " " + nombreApellido);
+				}
+				else{
+					permisoNoOtorgado;
 				}
 				break;
 			case "DificultadParaRespirar":
-				alert("Permiso no otorgado");
-				break;
-		
+					permisoNoOtorgado;
+				break;		
 			default:
-				if (temperaturaCorporal >= 38){
-					alert("Permiso no otorgado");
+				if(temperaturaCorporal < 38){
+					permisoOtorgado;
+				}
+				else{
+					permisoNoOtorgado;
 				}
 				break;
+		}
+		if (permisoOtorgado == true){
+			alert("Permiso otorgado." + " " + nombreApellido);
+		}
+		else if(permisoNoOtorgado == true){
+			alert("Permiso no otorgado" + " " + nombreApellido);
 		}
 	}
 	else{
