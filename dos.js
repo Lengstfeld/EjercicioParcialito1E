@@ -9,159 +9,63 @@ Al finalizar, se debe informar:
 	- Cantidad de artículos ingresados de categoría bebidas
 Considerar que las categorías pueden ser: almacen, lácteos, limpieza o bebidas y que el precio no puede ser menor a 0 ni mayor a 1000.
 */
-
-/*function mostrar()
-{
-	let nombreArticulo;
-	let categoria;
-	let precio;
-	let vMax;
-	let vMin;
-	let respuesta;
-	let contarBebidas;
-	let nombreArticuloMayorPrecio;
-	let nombreArticuloMenorPrecio;
-	
-	vMin = 0;
-	vMax = 0;
-	precio = 0;
-	categoria = prompt("Ingrese el articulo al que pertenece o ingrese todo para ingresar todo para varios articulos:").toLowerCase();
-	contarBebidas= 0;
-
-	switch (categoria) {
-		case "almacen":
-			alert("No se pide");
-			break;
-		case "lacteos":
-			do{
-				nombreArticulo = prompt("Ingrese el nombre del articulo");
-				precio = parseFloat(prompt("Ingrese el precio: "));
-				if(!(precio < 0) && !(precio > 1000)){
-				if (precio < vMin){
-					vMin = precio;
-					nombreArticuloMenorPrecio = nombreArticulo;
-            	}
-            	else if (precio > vMax){
-					vMax = precio;
-					nombreArticuloMayorPrecio = nombreArticulo;
-				}			
-				}else{
-					alert("Error de precio.");
-				}
-				respuesta = prompt("Quiere ingresar otro producto ?  si/no").toLowerCase();
-			}
-			while (respuesta == "si")
-			break;
-		case "limpieza":
-			alert("No se pide");
-			break;
-		case "bebidas":
-			do{
-				contarBebidas++;
-				respuesta = prompt("Quiere mas bebidas?  si/no").toLowerCase();
-			}while (respuesta == "si")
-			break;	
-		case "todo":
-			categoria = prompt("Ingrese la categoria");
-			nombreArticulo = prompt("Ingrese el nombre del articulo");
-			precio = parseFloat(prompt("Ingrese el precio: "));
-			if(!(precio < 0) && !(precio > 1000))
-			break;
-		default:
-			alert("Error");
-			break;
-		
-	}
-	if(categoria == "lacteos"){
-	document.writeln("Informe de precios solicitado "+ categoria + "<br></br>");
-	document.writeln("Con menor precio " + nombreArticuloMenorPrecio + " " + vMin + "<br></br>");
-	document.writeln("Con mayor precio " + nombreArticuloMayorPrecio + " " + vMax + "<br></br>");
-}else if(categoria == "bebidas"){
-	document.writeln("La cantidad de bebidas en stock son: "+contarBebidas);
-}
-else{
-	alert("Categoria incorrecta");
-}
-}*/
 function mostrar(){
-
+	let banderaMayorPrecio=0;
+	let banderaNombreMayorPrecio=0;
+	let banderaLacteosNombre=0;
+	let banderaLacteosPrecio=0;
 	let categoria;
 	let nombreArticulo;
-	let precio;
-	let vMin;
-	let vMax;
-	let contarBebidas;
-	let respuesta;
+	let precio=0;
+	let contarBebidas=0;
+	let respuesta="si";
 	let nombreLimpieza;
-	let precioLimpieza;
-	let precioBebida;
+	let precioLimpieza=0;
+	let precioBebida=0;
+	let precioAlmacen=0;
+	let precioLacteo=0;
 	let nombreBebida;
-	let noExiste;
 
-	precio = 0;
-	precioLimpieza = 0;
-	precioBebida = 0;
-	vMin = 0;
-	vMax = 0;
-	contarBebidas = 0;
-	
-	do{
-		nombreArticulo = prompt("Ingrese el nombre del articulo: ");
-		do{
-			precio = parseFloat(prompt("Ingrece el valor del articulo que cargo entre 0 y 1000$:"));
-		}while(precio < 0 || precio > 1000)
-		do{
-		categoria = prompt("Ingrese la categoria del articulo: ");
+	while (respuesta == "si") {
+
+		nombreArticulo=prompt("Ingrese el nombre del articulo: ");
+
+		categoria=prompt("Ingrese la categoria: ").toLowerCase();
+		while(!(categoria == "almacen" || categoria == "lacteos" || categoria == "limpieza" || categoria == "bebidas")){
+			categoria=prompt("Error. Ingrese la categoria: ").toLowerCase();
+		}
+
+		precio=parseFloat(prompt("Ingrese el valor del articulo: "));
+		while (precio < 1 || precio > 1000) {
+			precio=parseFloat(prompt("Error. Ingrese el valor del articulo: "));
+		}
+		if(banderaMayorPrecio == 0 || banderaMayorPrecio < precio){
+			banderaNombreMayorPrecio=nombreArticulo;
+			banderaMayorPrecio=precio;
+		}
+
 		switch (categoria) {
 			case "almacen":
-				do{
-
-
-				}while(respuesta=="si")
+				
 				break;
 			case "lacteos":
-				if (precio < vMin){
-					vMin = precio;
-            	}
-            	else if (precio > vMax){
-					vMax = precio;
-					nombreArticuloMayorPrecio = nombreArticulo;
-				}else{
-					alert("Error de precio.");
+				if(banderaLacteosPrecio == 0 || banderaLacteos < precio){
+					banderaLacteosNombre=nombreArticulo;
+					banderaLacteosPrecio=precio;
 				}
+				
 				break;
 			case "limpieza":
-				nombreLimpieza = nombreArticulo;
-				precioLimpieza = precio;
-				break;
-			case "bebidas":
-				do{
-					contarBebidas++;
-					respuesta = prompt("Quiere mas bebidas?  si/no").toLowerCase();					
-				}while (respuesta == "si")
-				precioBebida = precio;
-				nombreBebida = nombreArticulo;				
+				
 				break;		
 			default:
-				noExiste = alert("No existe esa categoria, reintente.");
+				contarBebidas++;
 				break;
 		}
-	}while(categoria == noExiste)	
-		respuesta = prompt("Quiere ingresar otro articulo? si/no");
-	}while(respuesta == "si")
-	
-	document.writeln("Stock Minimercado LaPachocha <br><br>");
-	if(categoria == "almacen"){
-		document.writeln("Almacen: " + "<br>");
-	}	
-	if(categoria == "lacteos"){
-		document.writeln("Lacteos: " + "<br>");
+		respuesta=prompt("Quiere seguir ingresando? si/no").toLowerCase();
 	}
-	if(categoria == "limpieza"){
-		document.writeln("Limpieza: " + nombreLimpieza + " " + precioLimpieza + "$ <br>");
-	}	
-	if(categoria == "bebidas"){
-		document.writeln("Bebida: "+ nombreBebida + " " + precioBebida + "$ " + " cantidad de bebidas: " + contarBebidas);
-	}
-	
+	document.writeln("Nombre de artículo con mayor precio " + banderaNombreMayorPrecio + "$" + banderaMayorPrecio + "<br>");
+	document.writeln("Nombre de artículo con mayor precio, de la categoría lácteos " + banderaLacteosNombre + "$" + banderaLacteosPrecio + "<br>");
+	document.writeln("Cantidad de artículos ingresados de categoría bebidas " + contarBebidas);
+
 }
