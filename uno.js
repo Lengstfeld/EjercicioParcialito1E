@@ -35,9 +35,12 @@ function mostrar()
 	
 	nombreApellido = document.getElementById("nombreyapellido").value;
 	temperaturaCorporal = parseFloat(document.getElementById("temperatura").value);
+	while (!(temperaturaCorporal < 35 || temperaturaCorporal > 40)) {
+		alert("Error. Vuelva a ingresar la temperatura.")
+		temperaturaCorporal = parseFloat(document.getElementById("temperatura").value);
+	}
 	sintomas = document.getElementById("Sintoma").value;
-
-	if (temperaturaCorporal >= 35 && temperaturaCorporal <= 40) {
+	
 		switch (sintomas) {
 			case "Ninguno":
 				if (temperaturaCorporal >= 38){
@@ -73,8 +76,4 @@ function mostrar()
 		else if(permisoNoOtorgado == true){
 			alert("Permiso no otorgado" + " " + nombreApellido);
 		}
-	}
-	else{
-		alert("Temperatura fuera de rango");
-	}
 }
